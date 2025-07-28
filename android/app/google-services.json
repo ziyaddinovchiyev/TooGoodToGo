@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "552741042562",
+    "project_id": "toogoodtogo-f458f",
+    "storage_bucket": "toogoodtogo-f458f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552741042562:android:186703d374210c32d3779b",
+        "android_client_info": {
+          "package_name": "com.example.too_good_to_go_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkG4wfnEC1HQu0XeEwV1eU7eGLhnKNfyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
