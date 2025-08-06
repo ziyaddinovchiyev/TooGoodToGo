@@ -21,7 +21,33 @@ final currentUserDataProvider = FutureProvider<UserModel?>((ref) async {
   
   final authService = ref.watch(authServiceProvider);
   try {
-    return await authService.getUserData(user.uid);
+    UserModel? userData = await authService.getUserData(user.uid);
+    
+    // If user doesn't exist in Firestore, create a default profile
+    if (userData == null) {
+      print("User not found in Firestore, creating default profile...");
+      userData = UserModel(
+        id: user.uid,
+        email: user.email ?? '',
+        name: user.displayName ?? 'User',
+        profileImageUrl: user.photoURL,
+        userType: UserType.customer, // Default to customer
+        createdAt: DateTime.now(),
+        lastActive: DateTime.now(),
+        isVerified: false,
+      );
+      
+      // Save the default profile to Firestore
+      try {
+        await authService.saveUserData(userData);
+        print("Default user profile created successfully");
+      } catch (e) {
+        print("Warning: Could not save default profile to Firestore: $e");
+        // Continue with the default profile even if Firestore save fails
+      }
+    }
+    
+    return userData;
   } catch (e) {
     print("Error getting user data: $e");
     return null;

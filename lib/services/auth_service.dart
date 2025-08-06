@@ -177,6 +177,18 @@ class AuthService {
     }
   }
 
+  // Save user data to Firestore
+  Future<void> saveUserData(UserModel userModel) async {
+    try {
+      await _firestore
+          .collection('users')
+          .doc(userModel.id)
+          .set(userModel.toFirestore());
+    } catch (e) {
+      throw 'Failed to save user data: $e';
+    }
+  }
+
   // Update user profile
   Future<void> updateUserProfile({
     required String uid,
